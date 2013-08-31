@@ -88,6 +88,6 @@ public class SolarGenerator extends Block implements IPowerEmitter
    @Override
    public void registerIcons(IconRegister par1IconRegister)
    {
-      blockIcon = par1IconRegister.registerIcon("SolarPowerMod:SolarGenerator");
+      this.blockIcon = par1IconRegister.registerIcon("SolarPowerMod:SolarGenerator");
    }
 }
