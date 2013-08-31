@@ -2,6 +2,9 @@ package kgbostian.mods.solarpowermod.blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraft.api.power.IPowerEmitter;
 import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerHandler;
@@ -12,16 +15,17 @@ import kgbostian.mods.solarpowermod.SolarPowerModBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class SolarGenerator extends Block implements IPowerEmitter, IPowerReceptor
+public class SolarGenerator extends Block implements IPowerEmitter
 {
-   private PowerHandler powerHandler;
    public float energy;
    
    public SolarGenerator(int par1)
@@ -37,7 +41,7 @@ public class SolarGenerator extends Block implements IPowerEmitter, IPowerRecept
       this.setResistance(10.0f);
       this.setUnlocalizedName("solarGenerator");
       this.setStepSound(soundGrassFootstep);
-      this.func_111022_d("solar_engine");
+      //this.func_111022_d("solar_engine");
    }
    
    @Override
@@ -65,36 +69,25 @@ public class SolarGenerator extends Block implements IPowerEmitter, IPowerRecept
    {
       return true;
    }
-
+   
+   /**
+    * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
+    */
+   @SideOnly(Side.CLIENT)
    @Override
-   public PowerReceiver getPowerReceiver(ForgeDirection side)
+   public Icon getIcon(int par1, int par2)
    {
-      // TODO Auto-generated method stub
-      return null;
+       return this.blockIcon;
    }
-
+   
+   /**
+    * When this method is called, your block should register all the icons it needs with the given IconRegister. This
+    * is the only chance you get to register icons.
+    */
+   @SideOnly(Side.CLIENT)
    @Override
-   public void doWork(PowerHandler workProvider)
+   public void registerIcons(IconRegister par1IconRegister)
    {
-      addEnergy(powerHandler.useEnergy(1, maxEnergyReceived(), true) * 0.95F);
-   }
-
-   private void addEnergy(float f)
-   {
-      // TODO Auto-generated method stub
-      
-   }
-
-   private float maxEnergyReceived()
-   {
-      
-      return 0;
-   }
-
-   @Override
-   public World getWorld()
-   {
-      // TODO Auto-generated method stub
-      return null;
+      blockIcon = par1IconRegister.registerIcon("SolarPowerMod:SolarGenerator");
    }
 }
