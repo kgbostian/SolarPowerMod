@@ -27,6 +27,9 @@ import net.minecraftforge.common.ForgeDirection;
 public class SolarGenerator extends Block implements IPowerEmitter
 {
    public float energy;
+   private Icon blockIconBottom;
+   private Icon blockIconSide;
+   private Icon blockIconTop;
    
    public SolarGenerator(int par1)
    {
@@ -77,7 +80,15 @@ public class SolarGenerator extends Block implements IPowerEmitter
    @Override
    public Icon getIcon(int par1, int par2)
    {
-       return this.blockIcon;
+      switch(par1)
+      {
+         case 0:
+            return blockIconBottom;
+         case 1:
+            return blockIconTop;
+         default:
+            return blockIconSide;
+      }
    }
    
    /**
@@ -88,6 +99,8 @@ public class SolarGenerator extends Block implements IPowerEmitter
    @Override
    public void registerIcons(IconRegister par1IconRegister)
    {
-      this.blockIcon = par1IconRegister.registerIcon("SolarPowerMod:SolarGenerator");
+      this.blockIconBottom = par1IconRegister.registerIcon("SolarPowerMod:SolarEngineBottom");
+      this.blockIconSide = par1IconRegister.registerIcon("SolarPowerMod:SolarEngineSide");
+      this.blockIconTop = par1IconRegister.registerIcon("SolarPowerMod:SolarEngineTop");
    }
 }
